@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard | EdTech</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i data-lucide="book-marked"></i>
+                <span>TeacherDash</span>
+            </div>
+            <div class="sidebar-profile">
+                <img src="https://i.pravatar.cc/60?img=12" alt="Teacher Avatar">
+                <h4>Jane Doe</h4>
+                <p>Lead Instructor</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="#" data-page="dashboard"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a></li>
+                    <li><a href="#" data-page="manage-content"><i data-lucide="folder-kanban"></i><span>Manage Content</span></a></li>
+                    <li><a href="#" data-page="study-rooms"><i data-lucide="door-open"></i><span>Study Rooms</span></a></li>
+                    <li><a href="#" data-page="student-progress"><i data-lucide="users"></i><span>Student Progress</span></a></li>
+                    <li><a href="#" data-page="feedback-reports"><i data-lucide="message-square-quote"></i><span>Feedback & Reports</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <ul>
+                    <li><a href="#" data-page="settings"><i data-lucide="settings"></i><span>Settings</span></a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <div class="main-content">
+            <header class="main-header">
+                <div class="header-search">
+                    <i data-lucide="search"></i>
+                    <input type="text" placeholder="Search students, content, or reports...">
+                </div>
+                <div class="header-actions">
+                    <button class="action-btn notifications">
+                        <i data-lucide="bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="profile-dropdown">
+                        <img src="https://i.pravatar.cc/40?img=12" alt="Teacher Avatar">
+                    </div>
+                </div>
+            </header>
+
+            <main id="dashboard" class="page-section active">
+                 <div class="dashboard-grid">
+                     <div class="card card-overview">
+                        <h3>Class Overview</h3>
+                        <div class="overview-section">
+                            <div class="overview-stats-group">
+                                <div class="stat-item">
+                                    <p>Total Students</p>
+                                    <span>64</span>
+                                </div>
+                                <div class="stat-item">
+                                    <p>Average Progress</p>
+                                    <span>72%</span>
+                                </div>
+                            </div>
+                            <div class="progress-circle-wrapper">
+                                <div class="progress-circle" data-progress="72">
+                                    <div class="progress-percentage">72%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="activity-section">
+                            <p>Active Learners Today: 28</p>
+                            <div class="sparkline-chart">
+                                <div style="height: 60%;"></div>
+                                <div style="height: 80%;"></div>
+                                <div style="height: 40%;"></div>
+                                <div style="height: 90%;"></div>
+                                <div style="height: 70%;"></div>
+                                <div style="height: 50%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-upload"><h3>Quick Upload</h3><div class="upload-buttons"><button class="btn btn-primary"><i data-lucide="video"></i> New Video</button><button class="btn btn-secondary"><i data-lucide="file-question"></i> New Quiz</button><button class="btn btn-secondary"><i data-lucide="file-text"></i> New Notes</button><button class="btn btn-secondary"><i data-lucide="clipboard-check"></i> New Assignment</button></div></div>
+                    <div class="card card-alerts"><h3>Student Alerts</h3><p>Students who might need intervention.</p><ul class="alert-list"><li><img src="https://i.pravatar.cc/40?img=3" alt="Student"><div class="alert-info"><strong>Alex Chen</strong><small>Needs revision on Algebra</small></div><span class="badge badge-warning">Struggling</span></li><li><img src="https://i.pravatar.cc/40?img=5" alt="Student"><div class="alert-info"><strong>Samantha Lee</strong><small>Missed Geometry quiz</small></div><span class="badge badge-danger">At Risk</span></li></ul></div>
+                    <div class="card card-leaderboard"><h3>Leaderboard Snapshot</h3><p>Top 3 students this week.</p><ul class="leaderboard-list"><li><span>🥇</span><img src="https://i.pravatar.cc/32?img=8" alt=""><strong>Anya Sharma</strong><span>4,500 pts</span></li><li><span>🥈</span><img src="https://i.pravatar.cc/32?img=7" alt=""><strong>Ben Carter</strong><span>3,800 pts</span></li><li><span>🥉</span><img src="https://i.pravatar.cc/32?img=9" alt=""><strong>Chloe Davis</strong><span>3,100 pts</span></li></ul></div>
+                </div>
+            </main>
+
+            <main id="manage-content" class="page-section">
+                <div class="page-header">
+                    <h1>Manage Content</h1>
+                    <div class="header-buttons">
+                        <button class="btn btn-live"><i data-lucide="video"></i> Start a Live Class</button>
+                        <button class="btn btn-primary"><i data-lucide="plus-circle"></i> Add New Content</button>
+                    </div>
+                </div>
+                <div class="card"><table class="content-table"><thead><tr><th>Title</th><th>Type</th><th>Date Uploaded</th><th>Status</th><th>Actions</th></tr></thead><tbody><tr><td>Introduction to Algebra</td><td><span class="badge badge-blue">Video</span></td><td>2025-09-15</td><td><span class="badge badge-success">Published</span></td><td><div class="action-buttons"><button class="btn-icon"><i data-lucide="edit-2"></i></button><button class="btn-icon btn-icon-danger"><i data-lucide="trash-2"></i></button></div></td></tr><tr><td>Unit 1 Quiz</td><td><span class="badge badge-purple">Quiz</span></td><td>2025-09-12</td><td><span class="badge badge-success">Published</span></td><td><div class="action-buttons"><button class="btn-icon"><i data-lucide="edit-2"></i></button><button class="btn-icon btn-icon-danger"><i data-lucide="trash-2"></i></button></div></td></tr><tr><td>Calculus Chapter Notes</td><td><span class="badge badge-grey">Notes</span></td><td>2025-09-10</td><td><span class="badge badge-warning">Draft</span></td><td><div class="action-buttons"><button class="btn-icon"><i data-lucide="edit-2"></i></button><button class="btn-icon btn-icon-danger"><i data-lucide="trash-2"></i></button></div></td></tr></tbody></table></div>
+            </main>
+
+            <main id="study-rooms" class="page-section">
+                <div class="page-header">
+                    <h1>Study Rooms</h1>
+                    <button class="btn btn-primary"><i data-lucide="plus"></i> Schedule New Room</button>
+                </div>
+                <div class="study-rooms-grid">
+                    <div class="room-card">
+                        <div class="room-status live">Live Now</div>
+                        <h4>Calculus Q&A Session</h4>
+                        <div class="room-details"><span><i data-lucide="calendar"></i> Oct 3, 2025</span><span><i data-lucide="clock"></i> 10:00 AM</span><span><i data-lucide="users"></i> 18 Students</span></div>
+                        <button class="btn btn-live full-width"><i data-lucide="log-in"></i> Join Room</button>
+                    </div>
+                    <div class="room-card">
+                        <div class="room-status upcoming">Upcoming</div>
+                        <h4>Physics Chapter 5 Review</h4>
+                        <div class="room-details"><span><i data-lucide="calendar"></i> Oct 4, 2025</span><span><i data-lucide="clock"></i> 2:00 PM</span></div>
+                        <button class="btn btn-secondary full-width"><i data-lucide="bell-plus"></i> Remind Me</button>
+                    </div>
+                    <div class="room-card">
+                        <div class="room-status finished">Finished</div>
+                        <h4>Algebra Mid-Term Prep</h4>
+                        <div class="room-details"><span><i data-lucide="calendar"></i> Oct 1, 2025</span><span><i data-lucide="users"></i> 25 Students</span></div>
+                        <button class="btn btn-secondary full-width"><i data-lucide="play-circle"></i> View Recording</button>
+                    </div>
+                </div>
+            </main>
+
+            <main id="student-progress" class="page-section">
+                <div class="page-header"><h1>Student Progress</h1><div class="filters"><select><option>All Classes</option></select><button class="btn btn-secondary"><i data-lucide="download"></i> Export Report</button></div></div>
+                <div class="card"><table class="content-table"><thead><tr><th>Student Name</th><th>Overall Progress</th><th>Quizzes Passed</th><th>Last Active</th><th>Actions</th></tr></thead><tbody><tr><td><strong>Alex Chen</strong></td><td><div class="progress-bar-table"><div class="progress" style="width: 65%;"></div><span>65%</span></div></td><td>8 / 12</td><td>1 day ago</td><td><button class="btn btn-small">View Details</button></td></tr><tr><td><strong>Anya Sharma</strong></td><td><div class="progress-bar-table"><div class="progress" style="width: 92%;"></div><span>92%</span></div></td><td>11 / 12</td><td>2 hours ago</td><td><button class="btn btn-small">View Details</button></td></tr><tr><td><strong>Samantha Lee</strong></td><td><div class="progress-bar-table"><div class="progress progress-danger" style="width: 45%;"></div><span>45%</span></div></td><td>5 / 12</td><td>4 days ago</td><td><button class="btn btn-small">View Details</button></td></tr></tbody></table></div>
+            </main>
+
+            <main id="feedback-reports" class="page-section">
+                <div class="page-header"><h1>Feedback & Reports</h1></div>
+                <div class="reports-grid">
+                    <div class="card">
+                        <h3>Recent Student Feedback</h3>
+                        <ul class="feedback-list">
+                            <li><img src="https://i.pravatar.cc/40?img=11" alt="Student"><div><strong>Ben Carter</strong><p>The last video on Algebra was super helpful!</p></div></li>
+                            <li><img src="https://i.pravatar.cc/40?img=15" alt="Student"><div><strong>Maria Garcia</strong><p>Could we have more practice problems for the next quiz?</p></div></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Generate Reports</h3>
+                        <form class="report-form">
+                            <div class="form-group"><label for="reportType">Report Type</label><select id="reportType"><option>Class Performance Summary</option><option>Individual Student Progress</option><option>Quiz Analytics</option></select></div>
+                            <div class="form-group"><label for="dateRange">Date Range</label><input type="date" id="dateRange"></div>
+                            <button class="btn btn-primary full-width"><i data-lucide="file-down"></i> Generate Report</button>
+                        </form>
+                    </div>
+                </div>
+            </main>
+            
+            <main id="settings" class="page-section">
+                <div class="page-header"><h1>Settings</h1></div>
+                <div class="card settings-card"><form><fieldset><legend>Profile Information</legend><div class="form-group"><label for="fullName">Full Name</label><input type="text" id="fullName" value="Jane Doe"></div><div class="form-group"><label for="email">Email Address</label><input type="email" id="email" value="jane.doe@example.com"></div></fieldset><fieldset><legend>Password</legend><div class="form-group"><label for="currentPassword">Current Password</label><input type="password" id="currentPassword"></div><div class="form-group"><label for="newPassword">New Password</label><input type="password" id="newPassword"></div></fieldset><button type="submit" class="btn btn-primary">Save Changes</button></form></div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.sidebar-nav a, .sidebar-footer a');
+            const pageSections = document.querySelectorAll('.page-section');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetPageId = link.getAttribute('data-page');
+                    document.querySelector('.sidebar-nav li.active, .sidebar-footer li.active')?.classList.remove('active');
+                    link.parentElement.classList.add('active');
+                    pageSections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === targetPageId) { section.classList.add('active'); }
+                    });
+                });
+            });
+
+            // Initialize Circular Progress Charts
+            document.querySelectorAll('.progress-circle').forEach(circle => {
+                const progress = circle.getAttribute('data-progress');
+                const circumference = 2 * Math.PI * 35; // 2 * PI * radius (radius is half of 70px width/height)
+                const offset = circumference - (progress / 100) * circumference;
+
+                // Create SVG elements dynamically
+                const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                svg.setAttribute("viewBox", "0 0 80 80"); // viewBox for a 70px diameter circle + padding
+                
+                const backgroundCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                backgroundCircle.setAttribute("cx", "40");
+                backgroundCircle.setAttribute("cy", "40");
+                backgroundCircle.setAttribute("r", "35");
+                backgroundCircle.setAttribute("fill", "none");
+                backgroundCircle.setAttribute("stroke", "var(--light-blue)");
+                backgroundCircle.setAttribute("stroke-width", "8");
+
+                const progressPath = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                progressPath.setAttribute("cx", "40");
+                progressPath.setAttribute("cy", "40");
+                progressPath.setAttribute("r", "35");
+                progressPath.setAttribute("fill", "none");
+                progressPath.setAttribute("stroke", "var(--primary-blue)");
+                progressPath.setAttribute("stroke-width", "8");
+                progressPath.setAttribute("stroke-dasharray", circumference);
+                progressPath.setAttribute("stroke-dashoffset", offset);
+                progressPath.setAttribute("stroke-linecap", "round");
+                progressPath.style.transformOrigin = "center";
+                progressPath.style.transform = "rotate(-90deg)";
+                progressPath.style.transition = "stroke-dashoffset 0.8s ease-out";
+
+                svg.appendChild(backgroundCircle);
+                svg.appendChild(progressPath);
+                circle.prepend(svg);
+            });
+
+
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>git 
