@@ -3,7 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const User = require('./models/User');
-const quizRoutes = require('./routes/quizRoutes');
 const { teachers, students } = require('./data/sampleData');
 
 const app = express();
@@ -12,24 +11,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Routes
-app.use('/api/quizzes', quizRoutes);
-
 // Connect to MongoDB
-const connectDB = async () => {
-    try {
-        const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/edtech', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-        console.log(`MongoDB Connected: ${conn.connection.host}`);
-    } catch (error) {
-        console.error(`Error: ${error.message}`);
-        process.exit(1);
-    }
-};
-
-connectDB();
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/edtech', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 // Seed data function
 const seedData = async () => {
