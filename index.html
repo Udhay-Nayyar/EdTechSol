@@ -59,23 +59,62 @@
         </div>
     </div>
 
-    <!-- Teacher Login Modal -->
+    <!-- Teacher Login/Registration Modal -->
     <div id="teacher-modal" class="modal fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center p-4 z-50 opacity-0">
         <div class="bg-gray-800 rounded-2xl shadow-lg p-8 w-full max-w-md transform transition-transform scale-95">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-bold text-white">Teacher Login</h2>
+                <h2 class="text-2xl font-bold text-white">Teacher Access</h2>
                 <button id="close-teacher-modal-btn" class="text-gray-400 hover:text-white">&times;</button>
             </div>
-            <form id="teacher-login-form">
+            <!-- Password Verification Form -->
+            <form id="teacher-password-form" class="mb-6">
                 <div class="mb-4">
-                    <label for="teacher-password" class="block text-gray-300 text-sm font-bold mb-2">Password</label>
+                    <label for="teacher-password" class="block text-gray-300 text-sm font-bold mb-2">Enter Access Password</label>
                     <input type="password" id="teacher-password" name="teacher-password" 
                            class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 border-gray-600 text-white leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500" 
                            required>
                 </div>
                 <div class="flex items-center justify-end">
                     <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition-colors">
-                        Login
+                        Verify
+                    </button>
+                </div>
+            </form>
+            <!-- Teacher Registration Form (Initially Hidden) -->
+            <form id="teacher-registration-form" class="hidden">
+                <div class="mb-4">
+                    <label for="teacher-name" class="block text-gray-300 text-sm font-bold mb-2">Full Name</label>
+                    <input type="text" id="teacher-name" name="teacher-name" 
+                           class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 border-gray-600 text-white leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500" 
+                           required>
+                </div>
+                <div class="mb-4">
+                    <label for="teacher-subject" class="block text-gray-300 text-sm font-bold mb-2">Primary Subject</label>
+                    <select id="teacher-subject" name="teacher-subject" 
+                            class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 border-gray-600 text-white leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500" 
+                            required>
+                        <option value="">Select your subject</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Biology">Biology</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="teacher-designation" class="block text-gray-300 text-sm font-bold mb-2">Designation</label>
+                    <input type="text" id="teacher-designation" name="teacher-designation" 
+                           class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 border-gray-600 text-white leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500" 
+                           placeholder="e.g., Lead Instructor, Senior Teacher" required>
+                </div>
+                <div class="mb-4">
+                    <label for="teacher-experience" class="block text-gray-300 text-sm font-bold mb-2">Years of Experience</label>
+                    <input type="number" id="teacher-experience" name="teacher-experience" 
+                           class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 border-gray-600 text-white leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500" 
+                           min="0" required>
+                </div>
+                <div class="flex items-center justify-end">
+                    <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition-colors">
+                        Continue to Dashboard
                     </button>
                 </div>
             </form>
@@ -201,16 +240,39 @@
                 }
             });
 
-            // Handle teacher login
-            teacherLoginForm.addEventListener('submit', (e) => {
+            // Handle teacher password verification
+            const teacherPasswordForm = document.getElementById('teacher-password-form');
+            const teacherRegistrationForm = document.getElementById('teacher-registration-form');
+
+            teacherPasswordForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const password = document.getElementById('teacher-password').value;
                 
                 if (password === DEFAULT_TEACHER_PASSWORD) {
-                    window.location.href = 'TeacherDash.html';
+                    // Hide password form and show registration form
+                    teacherPasswordForm.classList.add('hidden');
+                    teacherRegistrationForm.classList.remove('hidden');
                 } else {
                     alert('Incorrect password. Please try again.');
                 }
+            });
+
+            // Handle teacher registration
+            teacherRegistrationForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const teacherData = {
+                    name: document.getElementById('teacher-name').value.trim(),
+                    subject: document.getElementById('teacher-subject').value,
+                    designation: document.getElementById('teacher-designation').value.trim(),
+                    experience: document.getElementById('teacher-experience').value,
+                    lastLogin: new Date().toISOString()
+                };
+                
+                // Store teacher data
+                localStorage.setItem('teacherData', JSON.stringify(teacherData));
+                
+                // Redirect to teacher dashboard
+                window.location.href = 'TeacherDash.html';
             });
 
             studentInfoForm.addEventListener('submit', (e) => {
