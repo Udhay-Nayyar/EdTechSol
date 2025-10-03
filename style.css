@@ -55,7 +55,7 @@ body { font-family: 'Inter', sans-serif; background-color: var(--background-colo
 .card-overview .overview-stats-group {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 15px;  /*some change*/
 }
 .card-overview .stat-item {
     text-align: left;
