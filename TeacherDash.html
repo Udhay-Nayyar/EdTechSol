@@ -9,6 +9,168 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Modern Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #cbd5e1;
+        }
+
+        /* Advanced Animations */
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from { 
+                opacity: 0; 
+                transform: scale(0.95);
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Element Animations */
+        .question-item {
+            animation: fadeInUp 0.4s ease-out;
+        }
+
+        .btn-upload {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-upload:hover {
+            transform: translateY(-4px);
+        }
+
+        .btn-upload::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn-upload:hover::after {
+            transform: translateX(100%);
+        }
+
+        /* Card Hover Effects */
+        .card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Input Focus Effects */
+        input:focus, select:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Button Animations */
+        button {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        /* Glass Effect */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Validation Shake Animation */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+
+        .shake-animation {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        /* Modal Animations */
+        .modal:not(.hidden) .modal-content {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .modal {
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+        }
+
+        .modal:not(.hidden) {
+            opacity: 1;
+        }
+
+        /* Modal Content Area */
+        .modal-content {
+            position: relative;
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+            pointer-events: none;
+            border-radius: 1.5rem;
+        }
+    </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Check if teacher is logged in
@@ -110,7 +272,193 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card card-upload"><h3>Quick Upload</h3><div class="upload-buttons"><button class="btn btn-primary"><i data-lucide="video"></i> New Video</button><button class="btn btn-secondary"><i data-lucide="file-question"></i> New Quiz</button><button class="btn btn-secondary"><i data-lucide="file-text"></i> New Notes</button><button class="btn btn-secondary"><i data-lucide="clipboard-check"></i> New Assignment</button></div></div>
+            <div class="card card-upload bg-gradient-to-b from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="flex items-center">
+                            <div class="bg-gradient-to-br from-purple-500 to-purple-600 p-3 rounded-xl mr-4 shadow-lg shadow-purple-100">
+                                <i data-lucide="upload" class="h-6 w-6 text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-1">Quick Upload</h3>
+                                <p class="text-gray-500">Create and share learning materials</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-6">
+                        <button class="btn-upload relative flex items-center justify-center p-6 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-md hover:shadow-xl group overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000"></div>
+                            <div class="p-3 bg-white/20 rounded-xl mr-4 group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm">
+                                <i data-lucide="video" class="h-6 w-6"></i>
+                            </div>
+                            <div class="text-left">
+                                <span class="block font-semibold text-lg">New Video</span>
+                                <span class="text-sm text-blue-100">Upload video content</span>
+                            </div>
+                        </button>
+                        <button id="new-quiz-btn" class="btn-upload relative flex items-center justify-center p-6 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all duration-300 shadow-md hover:shadow-xl group overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000"></div>
+                            <div class="p-3 bg-white/20 rounded-xl mr-4 group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm">
+                                <i data-lucide="file-question" class="h-6 w-6"></i>
+                            </div>
+                            <div class="text-left">
+                                <span class="block font-semibold text-lg">New Quiz</span>
+                                <span class="text-sm text-purple-100">Create assessment</span>
+                            </div>
+                        </button>
+                        <button class="btn-upload relative flex items-center justify-center p-6 bg-gradient-to-br from-green-500 to-green-600 text-white rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-md hover:shadow-xl group overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000"></div>
+                            <div class="p-3 bg-white/20 rounded-xl mr-4 group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm">
+                                <i data-lucide="file-text" class="h-6 w-6"></i>
+                            </div>
+                            <div class="text-left">
+                                <span class="block font-semibold text-lg">New Notes</span>
+                                <span class="text-sm text-green-100">Share study material</span>
+                            </div>
+                        </button>
+                        <button class="btn-upload relative flex items-center justify-center p-6 bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-md hover:shadow-xl group overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000"></div>
+                            <div class="p-3 bg-white/20 rounded-xl mr-4 group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm">
+                                <i data-lucide="clipboard-check" class="h-6 w-6"></i>
+                            </div>
+                            <div class="text-left">
+                                <span class="block font-semibold text-lg">New Assignment</span>
+                                <span class="text-sm text-orange-100">Create homework</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Creation Modal -->
+            <div id="quiz-modal" class="modal hidden fixed inset-0 bg-gray-900/70 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-all duration-300">
+                <div class="bg-white rounded-2xl shadow-2xl shadow-purple-900/10 w-full max-w-4xl max-h-[90vh] overflow-hidden transform transition-all duration-300 scale-95 opacity-0 modal-content">
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="flex items-center">
+                            <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-3 rounded-xl mr-4 shadow-lg shadow-blue-100">
+                                <i data-lucide="file-question" class="h-6 w-6 text-white"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-800 mb-1">Create New Quiz</h2>
+                                <p class="text-sm text-gray-500">Design your quiz with multiple choice questions</p>
+                            </div>
+                        </div>
+                        <button type="button" id="close-quiz-modal" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                            <i data-lucide="x" class="h-6 w-6"></i>
+                        </button>
+                    </div>
+                    
+                    <form id="quiz-form" class="space-y-6">
+                        <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label for="quiz-title" class="flex items-center text-sm font-semibold text-gray-700">
+                                        <i data-lucide="pencil" class="h-4 w-4 mr-2 text-blue-600"></i>
+                                        Quiz Title
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" id="quiz-title" name="title" required 
+                                            class="w-full bg-white border-2 border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:border-gray-300"
+                                            placeholder="e.g., Algebra Basics Quiz">
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <label for="quiz-subject" class="flex items-center text-sm font-semibold text-gray-700">
+                                        <i data-lucide="book-open" class="h-4 w-4 mr-2 text-purple-600"></i>
+                                        Subject
+                                    </label>
+                                    <div class="relative">
+                                        <select id="quiz-subject" name="subject" required 
+                                            class="w-full bg-white border-2 border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:border-gray-300 appearance-none">
+                                            <option value="">Select Subject</option>
+                                            <option value="Mathematics">Mathematics</option>
+                                            <option value="Physics">Physics</option>
+                                            <option value="Chemistry">Chemistry</option>
+                                            <option value="Biology">Biology</option>
+                                        </select>
+                                        <i data-lucide="chevron-down" class="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none"></i>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <label for="quiz-grade" class="flex items-center text-sm font-semibold text-gray-700">
+                                        <i data-lucide="graduation-cap" class="h-4 w-4 mr-2 text-green-600"></i>
+                                        Grade Level
+                                    </label>
+                                    <div class="relative">
+                                        <select id="quiz-grade" name="grade" required 
+                                            class="w-full bg-white border-2 border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:border-gray-300 appearance-none">
+                                            <option value="">Select Grade</option>
+                                            <option value="9">9th Grade</option>
+                                            <option value="10">10th Grade</option>
+                                            <option value="11">11th Grade</option>
+                                            <option value="12">12th Grade</option>
+                                        </select>
+                                        <i data-lucide="chevron-down" class="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none"></i>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <label for="quiz-duration" class="flex items-center text-sm font-semibold text-gray-700">
+                                        <i data-lucide="clock" class="h-4 w-4 mr-2 text-orange-600"></i>
+                                        Duration
+                                    </label>
+                                    <div class="relative">
+                                        <input type="number" id="quiz-duration" name="duration" min="1" required 
+                                            class="w-full bg-white border-2 border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:border-gray-300"
+                                            placeholder="Duration in minutes">
+                                        <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm font-medium">minutes</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8">
+                            <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 mb-6 shadow-lg">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="bg-white/20 p-2 rounded-lg mr-3">
+                                            <i data-lucide="list-checks" class="h-5 w-5 text-white"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-white">Questions</h3>
+                                            <p class="text-blue-100 text-sm">Add multiple choice questions to your quiz</p>
+                                        </div>
+                                    </div>
+                                    <button type="button" id="add-question-btn" 
+                                        class="flex items-center px-5 py-2.5 bg-white text-blue-600 rounded-xl hover:bg-blue-50 transition-all duration-300 shadow-sm hover:shadow-md group">
+                                        <div class="p-1 bg-blue-100 rounded-lg mr-2 group-hover:scale-110 transition-transform">
+                                            <i data-lucide="plus-circle" class="h-5 w-5"></i>
+                                        </div>
+                                        <span class="font-medium">Add Question</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="questions-container" class="space-y-6">
+                                <!-- Questions will be added here dynamically -->
+                            </div>
+                            <div id="no-questions" class="text-center py-8 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200 hidden">
+                                <div class="bg-white/80 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
+                                    <i data-lucide="file-question" class="h-8 w-8 text-gray-400"></i>
+                                </div>
+                                <h4 class="text-gray-600 font-medium mb-2">No Questions Added Yet</h4>
+                                <p class="text-gray-500 text-sm">Click the "Add Question" button to start creating your quiz</p>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-200 pt-6 flex justify-end space-x-4">
+                            <button type="button" id="cancel-quiz-btn" 
+                                class="px-6 py-2.5 border-2 border-gray-200 text-gray-600 font-medium rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-300 flex items-center">
+                                <i data-lucide="x" class="h-5 w-5 mr-2"></i>
+                                Cancel
+                            </button>
+                            <button type="submit" 
+                                class="px-6 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-sm hover:shadow flex items-center">
+                                <i data-lucide="check" class="h-5 w-5 mr-2"></i>
+                                Create Quiz
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
                     <div class="card card-alerts"><h3>Student Alerts</h3><p>Students who might need intervention.</p><ul class="alert-list"><li><img src="https://i.pravatar.cc/40?img=3" alt="Student"><div class="alert-info"><strong>Alex Chen</strong><small>Needs revision on Algebra</small></div><span class="badge badge-warning">Struggling</span></li><li><img src="https://i.pravatar.cc/40?img=5" alt="Student"><div class="alert-info"><strong>Samantha Lee</strong><small>Missed Geometry quiz</small></div><span class="badge badge-danger">At Risk</span></li></ul></div>
                     <div class="card card-leaderboard"><h3>Leaderboard Snapshot</h3><p>Top 3 students this week.</p><ul class="leaderboard-list"><li><span>🥇</span><img src="https://i.pravatar.cc/32?img=8" alt=""><strong>Anya Sharma</strong><span>4,500 pts</span></li><li><span>🥈</span><img src="https://i.pravatar.cc/32?img=7" alt=""><strong>Ben Carter</strong><span>3,800 pts</span></li><li><span>🥉</span><img src="https://i.pravatar.cc/32?img=9" alt=""><strong>Chloe Davis</strong><span>3,100 pts</span></li></ul></div>
                 </div>
@@ -202,6 +550,253 @@
                         if (section.id === targetPageId) { section.classList.add('active'); }
                     });
                 });
+            });
+
+            // Quiz Modal Functionality
+            const quizModal = document.getElementById('quiz-modal');
+            const newQuizBtn = document.getElementById('new-quiz-btn');
+            const cancelQuizBtn = document.getElementById('cancel-quiz-btn');
+            const quizForm = document.getElementById('quiz-form');
+            const addQuestionBtn = document.getElementById('add-question-btn');
+            const questionsContainer = document.getElementById('questions-container');
+
+            // Show Quiz Modal
+            newQuizBtn.addEventListener('click', () => {
+                quizModal.classList.remove('hidden');
+                resetQuizForm();
+            });
+
+            // Hide Quiz Modal
+            cancelQuizBtn.addEventListener('click', () => {
+                quizModal.classList.add('hidden');
+                resetQuizForm();
+            });
+
+            // Close modal when clicking outside
+            quizModal.addEventListener('click', (e) => {
+                if (e.target === quizModal) {
+                    quizModal.classList.add('hidden');
+                    resetQuizForm();
+                }
+            });
+
+            // Show empty state initially
+            toggleEmptyState();
+
+            // Add Question
+            addQuestionBtn.addEventListener('click', () => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-item border-t border-gray-200 pt-4 mt-4';
+                const questionCount = questionsContainer.getElementsByClassName('question-item').length + 1;
+                
+                questionDiv.innerHTML = `
+                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="flex items-center">
+                                <span class="w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-lg font-semibold mr-3">
+                                    ${questionCount}
+                                </span>
+                                <h4 class="text-lg font-semibold text-gray-800">Question ${questionCount}</h4>
+                            </div>
+                            <button type="button" class="delete-question p-2 text-gray-400 hover:text-red-500 transition-colors">
+                                <i data-lucide="trash-2" class="h-5 w-5"></i>
+                            </button>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <input type="text" name="questions[${questionCount-1}][question]" 
+                                    placeholder="Enter your question" required
+                                    class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                            </div>
+                            
+                            <div class="options-container grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="relative">
+                                    <span class="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-medium">A</span>
+                                    <input type="text" name="questions[${questionCount-1}][options][]" 
+                                        placeholder="Option 1" required
+                                        class="w-full border border-gray-300 rounded-lg pl-12 pr-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                </div>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-medium">B</span>
+                                    <input type="text" name="questions[${questionCount-1}][options][]" 
+                                        placeholder="Option 2" required
+                                        class="w-full border border-gray-300 rounded-lg pl-12 pr-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                </div>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-medium">C</span>
+                                    <input type="text" name="questions[${questionCount-1}][options][]" 
+                                        placeholder="Option 3" required
+                                        class="w-full border border-gray-300 rounded-lg pl-12 pr-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                </div>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-medium">D</span>
+                                    <input type="text" name="questions[${questionCount-1}][options][]" 
+                                        placeholder="Option 4" required
+                                        class="w-full border border-gray-300 rounded-lg pl-12 pr-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Correct Answer</label>
+                                <select name="questions[${questionCount-1}][correctAnswer]" required
+                                    class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                    <option value="">Select correct option</option>
+                                    <option value="0">Option A</option>
+                                    <option value="1">Option B</option>
+                                    <option value="2">Option C</option>
+                                    <option value="3">Option D</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                questionsContainer.appendChild(questionDiv);
+                
+                // Initialize delete button for the new question
+                const deleteBtn = questionDiv.querySelector('.delete-question');
+                deleteBtn.addEventListener('click', () => {
+                    questionDiv.remove();
+                    updateQuestionNumbers();
+                });
+
+                // Initialize Lucide icons for the new elements
+                lucide.createIcons({
+                    target: questionDiv
+                });
+            });
+
+            // Function to toggle empty state visibility
+            function toggleEmptyState() {
+                const noQuestionsDiv = document.getElementById('no-questions');
+                const hasQuestions = questionsContainer.getElementsByClassName('question-item').length > 0;
+                noQuestionsDiv.classList.toggle('hidden', hasQuestions);
+            }
+
+            // Function to update question numbers after deletion
+            function updateQuestionNumbers() {
+                const questions = questionsContainer.getElementsByClassName('question-item');
+                Array.from(questions).forEach((question, index) => {
+                    const heading = question.querySelector('h4');
+                    heading.textContent = `Question ${index + 1}`;
+                });
+                toggleEmptyState();
+            }
+
+            // Function to reset the quiz form with animation
+            function resetQuizForm() {
+                const questions = questionsContainer.getElementsByClassName('question-item');
+                Array.from(questions).forEach((question, index) => {
+                    setTimeout(() => {
+                        question.style.animation = 'fadeInUp 0.3s reverse';
+                        setTimeout(() => questionsContainer.removeChild(question), 300);
+                    }, index * 100);
+                });
+                quizForm.reset();
+                
+                // Reset form fields with smooth transition
+                const inputs = quizForm.querySelectorAll('input, select');
+                inputs.forEach(input => {
+                    input.style.transition = 'border-color 0.3s ease';
+                    input.classList.remove('border-red-500');
+                });
+            }
+
+            // Enhanced form validation
+            function validateForm() {
+                let isValid = true;
+                const inputs = quizForm.querySelectorAll('input[required], select[required]');
+                
+                inputs.forEach(input => {
+                    if (!input.value) {
+                        isValid = false;
+                        input.classList.add('border-red-500');
+                        input.classList.add('shake-animation');
+                        setTimeout(() => input.classList.remove('shake-animation'), 500);
+                    } else {
+                        input.classList.remove('border-red-500');
+                    }
+                });
+
+                return isValid;
+            }
+
+            // Smooth scroll to added question
+            function scrollToElement(element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
+            // Handle form submission
+            quizForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Validate that at least one question exists
+                if (questionsContainer.getElementsByClassName('question-item').length === 0) {
+                    alert('Please add at least one question to the quiz');
+                    return;
+                }
+                
+                const formData = new FormData(quizForm);
+                const quizData = {
+                    title: formData.get('title'),
+                    subject: formData.get('subject'),
+                    grade: parseInt(formData.get('grade')),
+                    duration: parseInt(formData.get('duration')),
+                    questions: []
+                };
+
+                // Get all question divs
+                const questionDivs = questionsContainer.getElementsByClassName('question-item');
+                Array.from(questionDivs).forEach((questionDiv, index) => {
+                    const questionInputs = questionDiv.querySelectorAll('input[name^="questions"]');
+                    const options = Array.from(questionDiv.querySelectorAll('input[name$="[options][]"]')).map(input => input.value);
+                    const correctAnswer = parseInt(questionDiv.querySelector(`select[name="questions[${index}][correctAnswer]"]`).value);
+
+                    quizData.questions.push({
+                        question: questionInputs[0].value,
+                        options: options,
+                        correctAnswer: correctAnswer
+                    });
+                });
+
+                try {
+                    // Get the teacher data and token
+                    const teacherData = JSON.parse(localStorage.getItem('teacherData'));
+                    if (!teacherData) {
+                        alert('Please log in again');
+                        window.location.href = 'index.html';
+                        return;
+                    }
+
+                    // Add teacher information to quiz data
+                    quizData.teacher = teacherData.id; // Add the teacher's ID
+                    
+                    console.log('Sending quiz data:', quizData); // Debug log
+
+                    const response = await fetch('http://localhost:5000/api/quizzes', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        },
+                        body: JSON.stringify(quizData)
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        console.log('Quiz created successfully:', result); // Debug log
+                        alert('Quiz created successfully!');
+                        quizModal.classList.add('hidden');
+                        resetQuizForm();
+                    } else {
+                        const error = await response.json();
+                        console.error('Server error:', error); // Debug log
+                        alert(error.message || 'Error creating quiz. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Client error:', error); // Debug log
+                    alert('Error connecting to server. Please check your connection and try again.');
+                }
             });
 
             // Initialize Circular Progress Charts
